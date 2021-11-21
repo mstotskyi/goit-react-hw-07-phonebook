@@ -7,7 +7,7 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { contacts = [] } = useGetContactsQuery();
+  const { data = [] } = useGetContactsQuery();
   const [addNewContact] = useAddContactMutation();
 
   const IdName = uuid();
@@ -19,9 +19,10 @@ export default function ContactForm() {
       name: name,
       number: number,
     };
-    const existedContact = contacts.some(
-      element =>
-        element.name.toLocaleLowerCase() === obj.name.toLocaleLowerCase(),
+    console.log(obj);
+    const existedContact = data.some(
+      contact =>
+        contact.name.toLocaleLowerCase() === obj.name.toLocaleLowerCase(),
     );
 
     if (existedContact) {
